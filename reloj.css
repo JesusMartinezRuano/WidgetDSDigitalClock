@@ -1,0 +1,172 @@
+html {
+	height: 100%;
+}
+
+body {
+	height: 100%;
+	background: linear-gradient(311deg, #b9bbbb, #00517f);
+    background-size: 400% 400%;
+
+    -webkit-animation: AnimationName 21s ease infinite;
+    -moz-animation: AnimationName 21s ease infinite;
+    -o-animation: AnimationName 21s ease infinite;
+    animation: AnimationName 21s ease infinite;
+
+    @-webkit-keyframes AnimationName {
+        0%{background-position:0% 87%}
+        50%{background-position:100% 14%}
+        100%{background-position:0% 87%}
+    }
+    @-moz-keyframes AnimationName {
+        0%{background-position:0% 87%}
+        50%{background-position:100% 14%}
+        100%{background-position:0% 87%}
+    }
+    @-o-keyframes AnimationName {
+        0%{background-position:0% 87%}
+        50%{background-position:100% 14%}
+        100%{background-position:0% 87%}
+    }
+    @keyframes AnimationName {
+        0%{background-position:0% 87%}
+        50%{background-position:100% 14%}
+        100%{background-position:0% 87%}
+    }
+}
+
+.digit {
+	position: relative;
+	float: left;
+	width: 10vw;
+	height: 15vw;
+	background-color: rgb(32, 32, 32);
+	border-radius: 1vw;
+	text-align: center;
+	font-family: Oswald, sans-serif;
+	font-size: 11vw;
+}
+
+.base {
+	display: block;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	color: rgb(223, 223, 223);
+}
+
+.flap {
+	display: none;
+	position: absolute;
+	width: 100%;
+	height: 50%;
+	background-color: rgb(0,0,0);
+	left: 0;
+	top: 0;
+	border-radius: 1vw 1vw 0 0;
+	transform-origin: 50% 100%;
+	backface-visibility: hidden;
+	overflow: hidden;
+}
+
+.flap::before {
+	content: attr(data-content);
+	position: absolute;
+	left: 50%;
+}
+
+.flap.front::before, .flap.under::before {
+	top: 100%;
+	transform: translate(-50%, -50%);
+}
+
+.flap.back {
+	transform: rotateY(180deg);
+}
+
+.flap.back::before {
+	top: 100%;
+	transform: translate(-50%, -50%) rotateZ(180deg);
+}
+
+.flap.over {
+	z-index: 2;
+}
+
+.flap.under {
+	z-index: 1;
+}
+
+.flap.front {
+	animation: flip-down-front 300ms ease-in-out both;
+}
+
+.flap.back {
+	animation: flip-down-back 300ms ease-in-out both;
+}
+
+.flap.under {
+	animation: fade-under 300ms ease-in-out both;
+}
+
+@keyframes flip-down-front {
+	0% {
+		transform: rotateX(0deg);
+		background-color:rgb(32,32,32);
+        color: rgb(223,223,223);        
+	}
+
+	100% {
+		transform: rotateX(-180deg);
+		background-color:rgb(0,0,0);
+        color: rgb(207,207,207);
+    }
+}
+
+@keyframes flip-down-back {
+	0% {
+		transform: rotateY(180deg) rotateX(0deg);
+		background-color: rgb(0,0,0);
+		color: rgb(191,191,191);
+	}
+
+	100% {
+		transform: rotateY(180deg) rotateX(180deg);
+		background-color: rgb(64,64,64);
+		color: rgb(191,191,191);
+	}
+}
+
+@keyframes fade-under {
+	0% {
+		background-color: rgb(32,32,32);
+		color:rgb(223,223,223);
+	}
+
+	100% {
+		background-color: rgb(32, 32, 32);
+		color:rgb(223,223,223);
+	}
+}
+
+.clock {
+	position: absolute;
+	width: 70vw;
+	top: 50%;
+	left: 15vw;
+	transform: translateY(-50%);
+	perspective: 100vw;
+	perspective-origin: 50% 50%;
+}
+
+.clock .digit {
+	margin-right: 1vw;
+}
+
+.clock .digit:nth-child(2n+2) {
+	margin-right: 3.5vw;
+}
+
+.clock .digit:last-child {
+	margin-right: 0;
+}
